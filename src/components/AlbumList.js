@@ -1,10 +1,11 @@
+
 import React from "react";
 import { Text, FlatList, SectionList, StyleSheet } from "react-native";
-import AlbumDetail from "./AlbumDetail";
+
 import HotAlbumDetail from "./HotAlbumDetail";
 import sections from "../json/album_section.json";
 
-const Albumlist = () => {
+const Albumlist = ({ list, navigation }) => {
   const renderSectionHeader = ({section}) => (
     <>
       <Text style={styles.sectionHeader}>{section.title}</Text>
@@ -12,18 +13,18 @@ const Albumlist = () => {
         <FlatList
           horizontal={true}
           data={section.data}
-          renderItem={({ item }) => <HotAlbumDetail album={item} />}
+          renderItem={({ item }) => <HotAlbumDetail navigation={navigation} album={item} />}
           showsHorizontalScrollIndicator={false}
           keyExtractor={ item => item.title }
         />
       ) : null}
     </>
   );
-  const renderItem = ({ item, section }) => {
+  const renderItem = ({ item, section}) => {
     if (section.horizontal) {
       return null;
     }
-    return <AlbumDetail album={item} />
+    return <AlbumDetail album={item}/>
   };
 
   return (
@@ -41,13 +42,17 @@ const Albumlist = () => {
 
 const styles = StyleSheet.create({
   sectionHeader: {
-    fontWeight: '600',
-    fontSize: 18,
-    paddingTop: 20,
+    
+    fontWeight: 'bold',
+    fontSize: 24,
+    paddingTop: 8,
     paddingBottom: 5,
     paddingLeft: 10,
-    textTransform: 'uppercase',
+    
   },
 })
 
 export default Albumlist;
+
+
+

@@ -1,65 +1,71 @@
 import React from "react";
-import { StyleSheet, Text, View, Image} from "react-native";
-
+import { StyleSheet, Text, View, Image,Pressable} from "react-native";
+import Starprt from "./Starprt";
 const HotAlbumDetail = props => {
-   let { album } = props;
+   let { album,navigation } = props;
    return (
      <View style={{flexDirection: 'column'}}>
       <View style={styles.cardContainerStyle}>
         <View style={styles.cardSectionStyle}>
+          
+          <Pressable 
+            onPress={() => {navigation.navigate('Detail', album)} }//第一個引數放入要跳轉頁面的name，第二個引數則是放入要傳遞的資料
+          >
           <Image
             style={styles.imageStyle}
             source={{uri: album.image}}
           />
+          </Pressable>
+
         </View>
       </View>  
       <View style={styles.headerContainerStyle}>
+      <Starprt star={album.star}
+         brightstar_image={album.brightstar_image}
+         darkstar_image={album.darkstar_image}  />
+      
         <Text style={styles.headerTitleStyle}>{album.title}</Text>
         <Text style={styles.headerContentStyle}>{album.artist}</Text>
-      </View>   
+      </View>
+     
     </View>
 
   )};
 
 const styles = StyleSheet.create({
   cardContainerStyle: {
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: "#ddd",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
+    
     marginLeft: 5,
     marginRight: 5,
     marginTop: 10
   },
   headerContainerStyle: {
-    flexDirection: "column",
+    
     justifyContent: "space-around",
     paddingLeft: 12,
     width: 130,
   },
   headerTitleStyle: {
-    fontSize: 12,
-    fontWeight: 'bold',
+    
+    fontWeight: '500',
+    fontSize: 16,
+    marginTop:16,
+    marginBottom: 4
   },
   headerContentStyle: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '300',
-    color: "#222",
-    width: '100%'
+    color: "#666666",
+    width: '100%',
+    marginTop:8,
+    marginBottom:16
+
   },
-  cardSectionStyle: {
-    padding: 5,
-    backgroundColor: "#fff",
-    borderColor: "#ddd",
-    borderBottomWidth: 1
-  },
+
   imageStyle: {
-    height: 130,
-    width: 130,
+    height: 200,
+    width: 140,
+   
   }
 });
 
